@@ -1,7 +1,96 @@
 [project]
 name = "todolist"
 version = "0.1.0"
-description = "Add your description here"
+description = "FastAPI任务管理系统后端"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
+requires-python = ">=3.9"
+dependencies = [
+    # 核心Web框架
+    "fastapi>=0.104.1",
+    "uvicorn[standard]>=0.24.0",
+    
+    # 数据库相关
+    "sqlalchemy>=2.0.23",
+    "pymysql>=1.1.0",
+    "cryptography>=41.0.7",
+    
+    # 数据验证和序列化
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    
+    # 环境配置
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+# 开发依赖
+dev = [
+    "pytest>=7.4.3",
+    "pytest-asyncio>=0.21.1",
+    "httpx>=0.25.2",
+    "black>=23.11.0",
+    "isort>=5.12.0",
+]
+
+# 数据库迁移工具
+migration = [
+    "alembic>=1.13.1",
+]
+
+# 生产环境依赖
+prod = [
+    "gunicorn>=21.2.0",
+]
+
+# 构建系统配置
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# 项目URL和作者信息
+[project.urls]
+Homepage = "https://github.com/yourusername/todolist"
+Repository = "https://github.com/yourusername/todolist.git"
+Issues = "https://github.com/yourusername/todolist/issues"
+
+# 项目脚本入口
+[project.scripts]
+todolist = "app.main:app"
+
+# Black代码格式化配置
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # 排除的目录
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+# isort导入排序配置
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["app"]
+
+# pytest测试配置
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+asyncio_mode = "auto"

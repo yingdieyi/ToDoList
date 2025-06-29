@@ -1,7 +1,7 @@
 # 任务管理系统后端
 
 ## 使用技术
-后端使用 fastapi  mysql 
+后端使用 fastapi  mysql 包管理器使用uv
 
 前端使用 vue3 + ts 
 
