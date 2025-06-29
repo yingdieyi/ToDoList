@@ -47,6 +47,10 @@ prod = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+# Hatch构建配置 - 指定要打包的目录
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
 # 项目URL和作者信息
 [project.urls]
 Homepage = "https://github.com/yourusername/todolist"
